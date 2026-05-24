@@ -1,98 +1,70 @@
-我把两张图里的信息合并成完整的题目，并帮你核对样例逻辑，方便你一次性写对代码：
- 
- 
- 
-完整题目描述
- 
-Programming Language: Python 3.7 (version 3.7.3)
- 
-We emphasize the submission of a fully working code over partially correct but efficient code. Once submitted, you cannot review this problem again. You can use  print  to debug your code. The  print  may not work in case of syntax/runtime error.
+完整英文原版题目（含约束、样例与说明）
  
  
  
 Problem Statement
-A company is transmitting a message containing N positive integers to a new server in a secure manner. They have identified a procedure for transmission where, each time, a pair of identical integers is selected from the message and transmitted. This process continues until all pairs are sent. The procedure will then indicate the number of pairs transmitted and the number of remaining integers that were not paired and transmitted to the new server.
+Ethan is the leader of a team with N members. He has assigned an error score to each member in his team based on the bugs that he has found in that particular team member's task. Because the error score has increased to a significantly large value, he wants to give all the team members a chance to improve their error scores, thereby improving their reputation in the organization. He introduces a new rule that whenever a team member completes a project successfully, the error score of that member decreases by a count P and the error score of all the other team members whose score is greater than zero decreases by a count Q.
  
-Write an algorithm to find the number of pairs transmitted and number of integers remaining after transmitting the pairs to the new server.
+Write an algorithm to help Ethan find the minimum number of projects that the team must complete in order to make the error score of all the team members zero.
  
  
  
-Input
- 
-- The first line of input consists of an integer  message_size , representing the total number of integers in the message (N).
-- The second line consists of  N  space-separated integers, representing the integers of the message.
- 
-Output
-Print two space-separated integers representing:
- 
-1. the number of pairs transmitted
-2. the number of integers remaining after transmitting the pairs to the new server.
- 
 Constraints
  
-- 1 \leq message\_size \leq 100
-- (补充说明：每次传输的配对数 M 固定为 2，即只能两个相同的数组成一对)
+- 1 \leq N \leq 2 \times 10^5
+- 1 \leq Q \leq P \leq 10^9
+- 0 \leq M_i \leq 10^9 (where M_i represents the error score of the i-th team member)
+- 1 \leq i \leq N
+ 
+Note
+ 
+The error score of any team member can never be less than zero.
  
  
  
 Example
  
-- Input:
+Input:
  
 plaintext
   
 
-8
-12 10 6 12 10 12 1 21
+3 4 1
+6 4 1
  
  
-- Output:
+Output:
  
 plaintext
   
 
-2 4
+3
  
  
 Explanation:
-From the message  [12, 10, 6, 12, 10, 12, 1, 21] :
  
-- 数字  12  出现了 3 次 → 可以组成 1 对，剩余 1 个
-- 数字  10  出现了 2 次 → 可以组成 1 对，剩余 0 个
-- 数字  6  出现了 1 次 → 0 对，剩余 1 个
-- 数字  1  出现了 1 次 → 0 对，剩余 1 个
-- 数字  21  出现了 1 次 → 0 对，剩余 1 个
+1. The first time a team member completes a project successfully, the updated error scores will be:  2 3 0 .
+2. Then, when a second member completes a project successfully, the updated error scores will be:  1 0 0 .
+3. Then, when the first member completes another project successfully, the updated error scores will be:  0 0 0 .
  
-Total pairs removed: 1 + 1 = 2
-Integers left after removal: 1 + 0 + 1 + 1 + 1 = 4
-So the output is  2 4 .
+So, the team needs to complete 3 projects to make the error score of all the team members zero.
  
  
  
-适配样例的Python代码（可直接提交）
+Input
  
-python
-  
-
-# 读取输入
-message_size = int(input())
-numbers = list(map(int, input().split()))
-
-# 统计每个数字出现的次数
-from collections import Counter
-counts = Counter(numbers)
-
-total_pairs = 0
-remaining = 0
-
-for freq in counts.values():
-    # 每个数字能组成的对数 = 出现次数 // 2
-    total_pairs += freq // 2
-    # 每个数字剩余的个数 = 出现次数 % 2
-    remaining += freq % 2
-
-# 输出两个空格分隔的整数
-print(total_pairs, remaining)
+The first line of the input consists of three space-separated integers -  N, P and Q , representing:
+ 
+-  N : the total number of team members
+-  P : the count by which the error score of the team member who completes a project successfully decreases
+-  Q : the count by which the error score of other team members (with score > 0) decreases
+ 
+The second line consists of  N  space-separated integers representing the initial error scores of the team members.
+ 
+Output
+ 
+Print an integer representing the minimum number of projects that the team must complete in order to make the error score of all the team members zero.
+ 
  
  
-如果你需要，我可以给你一个不依赖collections模块的纯Python基础语法版本，避免在线环境的兼容问题。
+需要我基于这个样例，给你写一份可以直接提交的高效Python代码吗？
